@@ -20,6 +20,8 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.Constants;
 import frc.robot.commands.TurnInPlaceCommand;
 import frc.robot.commands.DriveDistance;
+import frc.robot.subsystems.Pneumatics;
+import frc.robot.commands.BrakeCommand;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -37,6 +39,8 @@ public class RobotContainer {
   // TurnInPlaceCommand(m_driveSubsystem, 90, 0.5);
    private final DriveDistance m_autoCommand = new DriveDistance(m_driveSubsystem, 60, 0.7);
   public static LimelightSubsystem m_LimelightSubsystem = new LimelightSubsystem();
+  public static Pneumatics m_Pneumatics = new Pneumatics();
+  private final BrakeCommand m_BrakeCommand = new BrakeCommand(m_Pneumatics);
 
   public static XboxController driverXBox = new XboxController(1);
   public static XboxController operatorController = new XboxController(2);
@@ -80,6 +84,8 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    JoystickButton brakeToggle = new JoystickButton(driverXBox, A_BUTTON_XBOX);
+    brakeToggle.toggleOnTrue(new BrakeCommand(m_Pneumatics));
 
   }
 

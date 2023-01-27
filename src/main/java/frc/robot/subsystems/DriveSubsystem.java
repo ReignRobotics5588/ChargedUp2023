@@ -22,10 +22,10 @@ public class DriveSubsystem extends SubsystemBase {
 
   public static DifferentialDrive m_drive;
 
-  private CANSparkMax frontLeftMotor = new CANSparkMax(1, MotorType.kBrushless);
-  private CANSparkMax frontRightMotor = new CANSparkMax(2, MotorType.kBrushless);
-  private CANSparkMax backLeftMotor = new CANSparkMax(3, MotorType.kBrushless);
-  private CANSparkMax backRightMotor = new CANSparkMax(4, MotorType.kBrushless);
+  private CANSparkMax frontLeftMotor = new CANSparkMax(3, MotorType.kBrushless);
+  private CANSparkMax frontRightMotor = new CANSparkMax(4, MotorType.kBrushless);
+  private CANSparkMax backLeftMotor = new CANSparkMax(5, MotorType.kBrushless);
+  private CANSparkMax backRightMotor = new CANSparkMax(6, MotorType.kBrushless);
 
   private RelativeEncoder m_frontLeftEncoder = frontLeftMotor.getEncoder();
   private RelativeEncoder m_frontRightEncoder = frontRightMotor.getEncoder();

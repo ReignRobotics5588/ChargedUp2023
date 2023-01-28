@@ -1,7 +1,8 @@
 package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 
@@ -9,7 +10,7 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 
 public class Pneumatics extends SubsystemBase {
     Compressor phCompressor = new Compressor(1, PneumaticsModuleType.REVPH);
-    Solenoid brakeSolenoidPH = new Solenoid(PneumaticsModuleType.REVPH, 1);
+    DoubleSolenoid brakeSolenoidPH = new DoubleSolenoid(PneumaticsModuleType.REVPH, 1, 0 );
     /** Creates a new ExampleSubsystem. */
   public Pneumatics() {}
 
@@ -39,12 +40,17 @@ public class Pneumatics extends SubsystemBase {
     return phCompressor.getCurrent();
   }
 
+  //unsure about this -- dont completely know if this is right values -- ask zach or larry on monday :)
+  public void setOff(){
+    brakeSolenoidPH.set(Value.kOff);
+  }
+
   public void setOut(){
-    brakeSolenoidPH.set(true);
+    brakeSolenoidPH.set(Value.kForward);
   }
 
   public void setIn(){
-    brakeSolenoidPH.set(false);
+    brakeSolenoidPH.set(Value.kReverse);
   }
 
   public void toggleBrake(){

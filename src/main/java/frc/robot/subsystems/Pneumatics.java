@@ -41,6 +41,10 @@ public class Pneumatics extends SubsystemBase {
   }
 
   //unsure about this -- dont completely know if this is right values -- ask zach or larry on monday :)
+
+  //We can support all the functions supported by solenoid by most likely we will only care about toggle() 
+  // since that just changes the state (ex: in -> out or out -> in) -zach
+
   public void setOff(){
     brakeSolenoidPH.set(Value.kOff);
   }

@@ -40,7 +40,6 @@ public class RobotContainer {
    private final DriveDistance m_autoCommand = new DriveDistance(m_driveSubsystem, 60, 0.7);
   public static LimelightSubsystem m_LimelightSubsystem = new LimelightSubsystem();
   public static Pneumatics m_Pneumatics = new Pneumatics();
-  private final BrakeCommand m_BrakeCommand = new BrakeCommand(m_Pneumatics);
 
   public static XboxController driverXBox = new XboxController(1);
   public static XboxController operatorController = new XboxController(2);

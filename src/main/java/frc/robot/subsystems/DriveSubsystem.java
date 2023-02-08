@@ -10,16 +10,28 @@
 package frc.robot.subsystems;
 
 //import com.revrobotics.CANEncoder;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import frc.robot.Constants;
+import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
+
+import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.SPI;
+
+//work on https://docs.wpilib.org/en/stable/docs/software/kinematics-and-odometry/intro-and-chassis-speeds.html
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
 
 public class DriveSubsystem extends SubsystemBase {
 
+  //https://docs.wpilib.org/en/stable/docs/software/kinematics-and-odometry/intro-and-chassis-speeds.html
   public static DifferentialDrive m_drive;
 
   private CANSparkMax frontLeftMotor = new CANSparkMax(1, MotorType.kBrushless);
@@ -31,6 +43,14 @@ public class DriveSubsystem extends SubsystemBase {
   private RelativeEncoder m_frontRightEncoder = frontRightMotor.getEncoder();
   private RelativeEncoder m_backRightEncoder = backRightMotor.getEncoder();
   private RelativeEncoder m_backLeftEncoder = backLeftMotor.getEncoder();
+
+  AHRS m_ahrs = new AHRS(SPI.Port.kMXP);
+
+  DifferentialDriveOdometry m_odometry;
+
+  //may need to reset here
+
+  Pose2d m_pose;
 
   public DriveSubsystem() {
     frontLeftMotor.setInverted(true);
@@ -64,6 +84,9 @@ public class DriveSubsystem extends SubsystemBase {
 
     m_drive = new DifferentialDrive(frontLeftMotor, frontRightMotor);
 
+    Rotation2d rotation2D = new Rotation2d((double)m_ahrs.getYaw());
+    m_pose = new Pose2d();
+    m_odometry = new DifferentialDriveOdometry(rotation2D, getLeftEncoderDistance(), getRighttEncoderDistance(), m_pose);
     // ((Object) m_drive).setRightSideInverted(false);
     m_drive.setMaxOutput(.80);
   }
@@ -81,6 +104,15 @@ public class DriveSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     m_drive.feedWatchdog(); // check this
+    Rotation2d currentRotation = new Rotation2d(m_ahrs.getYaw());
+    m_pose = m_odometry.update(currentRotation,
+    getLeftEncoderDistance(),
+    getRighttEncoderDistance());
+
+    SmartDashboard.putNumber("Odometry X : ", m_pose.getX()); // 
+    SmartDashboard.putNumber("Odometry Y : ", m_pose.getY()); // 
+
+
   }
 
   public void resetEncoders() {

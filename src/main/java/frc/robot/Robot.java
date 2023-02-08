@@ -12,7 +12,8 @@ import edu.wpi.first.wpilibj.XboxController;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.SPI;
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to
@@ -27,6 +28,10 @@ public class Robot extends TimedRobot {
 
   private RobotContainer m_robotContainer;
 
+  AHRS m_ahrs = new AHRS(SPI.Port.kMXP);
+
+  // :D
+
   /**
    * This function is run when the robot is first started up and should be used
    * for any
@@ -38,6 +43,7 @@ public class Robot extends TimedRobot {
     // and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+    m_ahrs.reset();
   }
 
   /**
@@ -51,6 +57,7 @@ public class Robot extends TimedRobot {
    * and
    * SmartDashboard integrated updating.
    */
+
   @Override
   public void robotPeriodic() {
     // Runs the Scheduler. This is responsible for polling buttons, adding
@@ -59,9 +66,23 @@ public class Robot extends TimedRobot {
     // interrupted commands,
     // and running subsystem periodic() methods. This must be called from the
     // robot's periodic
-    // block in order for anything in the Command-based framework to work.
+    // block in order for anything in the Command-based framework to work. 
     CommandScheduler.getInstance().run();
 
+     //SmartDashboard.putNumber("Angle: ", angle); //needs % 360
+     SmartDashboard.putNumber("Yaw: ", m_ahrs.getYaw()); // spin
+     SmartDashboard.putNumber("Pitch: ", m_ahrs.getPitch()); // tilt forward/backwards
+     SmartDashboard.putNumber("Roll: ", m_ahrs.getRoll()); // 
+     /* 
+     SmartDashboard.putNumber("X Displacement: ", m_ahrs.getDisplacementX());
+     SmartDashboard.putNumber("Y Displacement: ", m_ahrs.getDisplacementY());
+     SmartDashboard.putNumber("Actual Update Rate: ", m_ahrs.getActualUpdateRate());
+     SmartDashboard.putNumber("Expected Update Rate: ", m_ahrs.getRequestedUpdateRate());
+     SmartDashboard.putNumber("X Accel: ", m_ahrs.getRawAccelX());
+     SmartDashboard.putNumber("Y Accel: ", m_ahrs.getRawAccelY());
+     SmartDashboard.putNumber("X Velocity: ", m_ahrs.getVelocityX());
+     SmartDashboard.putNumber("Y Velocity: ", m_ahrs.getVelocityY());
+     */
   }
 
   /** This function is called once each time the robot enters Disabled mode. */

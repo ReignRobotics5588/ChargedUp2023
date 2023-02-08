@@ -11,11 +11,11 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 public class Pneumatics extends SubsystemBase {
     Compressor phCompressor = new Compressor(1, PneumaticsModuleType.REVPH);
     DoubleSolenoid leftbrakeSolenoidPH = new DoubleSolenoid(PneumaticsModuleType.REVPH, 0, 1 );
-    DoubleSolenoid rightbrakeSolenoidPH = new DoubleSolenoid(PneumaticsModuleType.REVPH, 2, 3 );
+    //DoubleSolenoid rightbrakeSolenoidPH = new DoubleSolenoid(PneumaticsModuleType.REVPH, 2, 3 );
     /** Creates a new ExampleSubsystem. */
   public Pneumatics() {
-    leftbrakeSolenoidPH.set(Value.kReverse);
-    rightbrakeSolenoidPH.set(Value.kReverse);}
+    leftbrakeSolenoidPH.set(Value.kReverse);}
+    //rightbrakeSolenoidPH.set(Value.kReverse);}
 
   @Override
   public void periodic() {
@@ -50,16 +50,16 @@ public class Pneumatics extends SubsystemBase {
 
   public void setOff(){
     leftbrakeSolenoidPH.set(Value.kOff);
-    rightbrakeSolenoidPH.set(Value.kOff);
+    //rightbrakeSolenoidPH.set(Value.kOff);
   }
 
   public void setOut(){
     leftbrakeSolenoidPH.set(Value.kForward);
-    rightbrakeSolenoidPH.set(Value.kForward);
+    //rightbrakeSolenoidPH.set(Value.kForward);
   }
 
   public void toggleBrake(){
     leftbrakeSolenoidPH.toggle();
-    rightbrakeSolenoidPH.toggle();
+    //rightbrakeSolenoidPH.toggle();
   }
 }

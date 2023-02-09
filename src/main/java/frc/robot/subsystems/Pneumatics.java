@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 
 public class Pneumatics extends SubsystemBase {
     Compressor phCompressor = new Compressor(1, PneumaticsModuleType.REVPH);
-    DoubleSolenoid leftbrakeSolenoidPH = new DoubleSolenoid(PneumaticsModuleType.REVPH, 0, 1 );
+    DoubleSolenoid leftbrakeSolenoidPH = new DoubleSolenoid(PneumaticsModuleType.REVPH, 5, 6 );
     //DoubleSolenoid rightbrakeSolenoidPH = new DoubleSolenoid(PneumaticsModuleType.REVPH, 2, 3 );
     /** Creates a new ExampleSubsystem. */
   public Pneumatics() {

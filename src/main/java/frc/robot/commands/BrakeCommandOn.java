@@ -4,7 +4,7 @@ import frc.robot.subsystems.Pneumatics;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class BrakeCommand extends CommandBase {
+public class BrakeCommandOn extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final Pneumatics m_Pneumatics;
 
@@ -13,7 +13,7 @@ public class BrakeCommand extends CommandBase {
    *
    * @param Pneumatics The subsystem used by this command.
    */
-  public BrakeCommand(Pneumatics subsystem) {
+  public BrakeCommandOn(Pneumatics subsystem) {
     m_Pneumatics = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
@@ -22,7 +22,7 @@ public class BrakeCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_Pneumatics.toggleBrake();
+    m_Pneumatics.setOff();
   }
 
   // Called every time the scheduler runs while the command is scheduled.

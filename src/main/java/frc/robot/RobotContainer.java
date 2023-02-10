@@ -21,7 +21,8 @@ import frc.robot.Constants;
 import frc.robot.commands.TurnInPlaceCommand;
 import frc.robot.commands.DriveDistance;
 import frc.robot.subsystems.Pneumatics;
-import frc.robot.commands.BrakeCommand;
+import frc.robot.commands.BrakeCommandOff;
+import frc.robot.commands.BrakeCommandOn;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -83,8 +84,10 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    JoystickButton brakeToggle = new JoystickButton(driverXBox, A_BUTTON_XBOX);
-    brakeToggle.toggleOnTrue(new BrakeCommand(m_Pneumatics));
+    JoystickButton brakeOn = new JoystickButton(driverXBox, A_BUTTON_XBOX);
+    brakeOn.toggleOnTrue(new BrakeCommandOn(m_Pneumatics));
+    JoystickButton brakeOff = new JoystickButton(driverXBox, B_BUTTON_XBOX);
+    brakeOff.toggleOnTrue(new BrakeCommandOff(m_Pneumatics));
 
   }
 

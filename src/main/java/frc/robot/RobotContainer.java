@@ -10,6 +10,7 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.DriveCameraSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -33,6 +34,7 @@ import frc.robot.commands.DriveDistance;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveSubsystem m_driveSubsystem = new DriveSubsystem();// declaring new drivesystem object
+  private final DriveCameraSubsystem m_driveCameraSubsystem = new DriveCameraSubsystem();
   // private final TurnInPlaceCommand m_autoCommand = new
   // TurnInPlaceCommand(m_driveSubsystem, 90, 0.5);
    private final DriveDistance m_autoCommand = new DriveDistance(m_driveSubsystem, 60, 0.7);

@@ -12,9 +12,9 @@ public class DriveCameraSubsystem {
     public DriveCameraSubsystem()
     {   
         
-       UsbCamera camera = CameraServer.startAutomaticCapture("strawberrcam", 0);
-       camera.setResolution(320, 240)
-       camera.setFPS(10)
+       UsbCamera camera = CameraServer.startAutomaticCapture();
+       camera.setResolution(320, 240);
+       camera.setFPS(10);
     }
 
 }

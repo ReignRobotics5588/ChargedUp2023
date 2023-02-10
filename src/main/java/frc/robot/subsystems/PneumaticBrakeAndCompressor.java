@@ -5,17 +5,18 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.Solenoid;
 
 
 
-public class Pneumatics extends SubsystemBase {
+public class PneumaticBrakeAndCompressor extends SubsystemBase {
     Compressor phCompressor = new Compressor(1, PneumaticsModuleType.REVPH);
-    DoubleSolenoid leftbrakeSolenoidPH = new DoubleSolenoid(PneumaticsModuleType.REVPH, 5, 6 );
-    //DoubleSolenoid rightbrakeSolenoidPH = new DoubleSolenoid(PneumaticsModuleType.REVPH, 2, 3 );
-    /** Creates a new ExampleSubsystem. */
-  public Pneumatics() {
-    leftbrakeSolenoidPH.set(Value.kReverse);}
-    //rightbrakeSolenoidPH.set(Value.kReverse);}
+    DoubleSolenoid brakeSolenoidPH = new DoubleSolenoid(PneumaticsModuleType.REVPH, 5, 6 );
+    
+
+  public PneumaticBrakeAndCompressor() {
+    brakeSolenoidPH.set(Value.kReverse);
+   }
 
   @Override
   public void periodic() {
@@ -48,18 +49,19 @@ public class Pneumatics extends SubsystemBase {
   //We can support all the functions supported by solenoid by most likely we will only care about toggle() 
   // since that just changes the state (ex: in -> out or out -> in) -zach
 
-  public void setOff(){
-    leftbrakeSolenoidPH.set(Value.kOff);
-    //rightbrakeSolenoidPH.set(Value.kOff);
+  public void brakeSetOff(){
+    brakeSolenoidPH.set(Value.kOff);
+   
   }
 
-  public void setOut(){
-    leftbrakeSolenoidPH.set(Value.kForward);
-    //rightbrakeSolenoidPH.set(Value.kForward);
+  public void brakeSetOn(){
+    brakeSolenoidPH.set(Value.kForward);
+    
   }
 
   public void toggleBrake(){
-    leftbrakeSolenoidPH.toggle();
-    //rightbrakeSolenoidPH.toggle();
+    brakeSolenoidPH.toggle();
+
   }
+
 }

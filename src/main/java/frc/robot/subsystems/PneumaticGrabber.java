@@ -15,7 +15,7 @@ public class PneumaticGrabber extends SubsystemBase {
     
 
   public PneumaticGrabber() {
-    grabberSolenoid.set(Value.kReverse);
+    grabberSolenoid.set(Value.kForward);
    }
 
   @Override
@@ -35,7 +35,7 @@ public class PneumaticGrabber extends SubsystemBase {
   // since that just changes the state (ex: in -> out or out -> in) -zach
 
   public void grabberSetOff(){
-    grabberSolenoid.set(Value.kOff);
+    grabberSolenoid.set(Value.kReverse);
    
   }
 

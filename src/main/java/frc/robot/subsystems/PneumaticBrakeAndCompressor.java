@@ -15,7 +15,7 @@ public class PneumaticBrakeAndCompressor extends SubsystemBase {
     
 
   public PneumaticBrakeAndCompressor() {
-    brakeSolenoidPH.set(Value.kReverse);
+    brakeSolenoidPH.set(Value.kForward);
    }
 
   @Override
@@ -45,12 +45,12 @@ public class PneumaticBrakeAndCompressor extends SubsystemBase {
   }
 
   //unsure about this -- dont completely know if this is right values -- ask zach or larry on monday :)
-
+  //kReverse --> brake enabled, kForward --> brake disabled
   //We can support all the functions supported by solenoid by most likely we will only care about toggle() 
   // since that just changes the state (ex: in -> out or out -> in) -zach
 
   public void brakeSetOff(){
-    brakeSolenoidPH.set(Value.kOff);
+    brakeSolenoidPH.set(Value.kReverse);
    
   }
 

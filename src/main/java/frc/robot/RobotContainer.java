@@ -20,7 +20,8 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.Constants;
 import frc.robot.commands.TurnInPlaceCommand;
 import frc.robot.commands.DriveDistance;
-import frc.robot.subsystems.Pneumatics;
+import frc.robot.subsystems.PneumaticBrakeAndCompressor;
+import frc.robot.subsystems.PneumaticGrabber;
 import frc.robot.commands.BrakeCommandOff;
 import frc.robot.commands.BrakeCommandOn;
 
@@ -40,7 +41,7 @@ public class RobotContainer {
   // TurnInPlaceCommand(m_driveSubsystem, 90, 0.5);
    private final DriveDistance m_autoCommand = new DriveDistance(m_driveSubsystem, 60, 0.7);
   public static LimelightSubsystem m_LimelightSubsystem = new LimelightSubsystem();
-  public static Pneumatics m_Pneumatics = new Pneumatics();
+  public static PneumaticBrakeAndCompressor m_Pneumatics = new PneumaticBrakeAndCompressor();
 
   public static XboxController driverXBox = new XboxController(1);
   public static XboxController operatorController = new XboxController(2);

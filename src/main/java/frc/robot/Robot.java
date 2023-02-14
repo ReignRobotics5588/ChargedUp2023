@@ -11,9 +11,14 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.XboxController;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+//for NavX + Smartdashboard
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to
@@ -25,14 +30,17 @@ import edu.wpi.first.wpilibj.SPI;
  */
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
-
   private RobotContainer m_robotContainer;
 
   AHRS m_ahrs = new AHRS(SPI.Port.kMXP);
+<<<<<<< Updated upstream
 
   // :D
 
   /**
+=======
+   /**
+>>>>>>> Stashed changes
    * This function is run when the robot is first started up and should be used
    * for any
    * initialization code.

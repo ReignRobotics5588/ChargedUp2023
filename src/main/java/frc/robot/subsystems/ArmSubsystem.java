@@ -27,6 +27,7 @@ public class ArmSubsystem extends SubsystemBase {
   public ArmSubsystem() {
     upperJoint = new CANSparkMax(11, MotorType.kBrushless);
     lowerJoint = new CANSparkMax(12, MotorType.kBrushless);
+    lowerJoint.setInverted(true);
 
     m_upperJointEncoder = upperJoint.getAlternateEncoder(Type.kQuadrature, kCPR);
     m_lowerJointEncoder = lowerJoint.getAlternateEncoder(Type.kQuadrature, kCPR);

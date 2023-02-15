@@ -12,4 +12,5 @@ public final class Constants {
     public static final double K_TURN = 0.25;
     public static final double MAX_SPEED = 0.25;
     public static final int SMART_LIMIT = 80;
+    public static final double ARM_SPEED = 0.1;
 }

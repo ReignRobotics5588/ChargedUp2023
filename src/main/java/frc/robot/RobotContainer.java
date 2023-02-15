@@ -25,6 +25,7 @@ import frc.robot.subsystems.PneumaticBrakeAndCompressor;
 import frc.robot.subsystems.PneumaticGrabber;
 import frc.robot.commands.BrakeCommandOff;
 import frc.robot.commands.BrakeCommandOn;
+import frc.robot.subsystems.ArmSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -44,6 +45,7 @@ public class RobotContainer {
    private final DriveDistance m_autoCommand = new DriveDistance(m_driveSubsystem, 60, 0.7);
   public static LimelightSubsystem m_LimelightSubsystem = new LimelightSubsystem();
   public static PneumaticBrakeAndCompressor m_Pneumatics = new PneumaticBrakeAndCompressor();
+  public static ArmSubsystem m_ArmSubsystem = new ArmSubsystem();
 
   public static XboxController driverXBox = new XboxController(1);
   public static XboxController operatorController = new XboxController(2);
@@ -68,6 +70,10 @@ public class RobotContainer {
     m_driveSubsystem.setDefaultCommand(
         new RunCommand(() -> m_driveSubsystem.tankDrive(driverXBox.getRawAxis(1), driverXBox.getRawAxis(5)),
             m_driveSubsystem));
+
+    m_ArmSubsystem.setDefaultCommand(
+      new RunCommand(() -> m_ArmSubsystem.driveArm(operatorController.getRawAxis(1), operatorController.getRawAxis(5)),
+          m_ArmSubsystem));
     // ^ Setting the Default Command to m_robotDrive, meaning it will drive as long
     // as nothing else is scheduled
 

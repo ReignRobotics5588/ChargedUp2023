@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
 
-
 public class Odometry extends SubsystemBase{
 
     DriveSubsystem m_drive = new DriveSubsystem();
@@ -29,18 +28,16 @@ public class Odometry extends SubsystemBase{
 
     public Odometry(){
 
-
-
         Rotation2d rotation2D = new Rotation2d(m_ahrs.getYaw());
         m_odometry = new DifferentialDriveOdometry(rotation2D, m_drive.getLeftEncoderDistance(), m_drive.getRighttEncoderDistance(), m_pose);
 
-        //9.85in(?) gear ratio, 6in diameter wheel 
-        //wheel speed-> chassis speed
+        // 9.85in(?) gear ratio, 6in diameter wheel 
+        // wheel speed-> chassis speed
 
         DifferentialDriveKinematics kinematics = new DifferentialDriveKinematics(0.1524);
         DifferentialDriveWheelSpeeds wheelSpeeds = new DifferentialDriveWheelSpeeds(6.0,6.0);
         ChassisSpeeds chassisSpeed = kinematics.toChassisSpeeds(wheelSpeeds);
-
+        
         m_linearVelocity = chassisSpeed.vxMetersPerSecond;
         m_angularVelocity = chassisSpeed.omegaRadiansPerSecond;
 
@@ -54,11 +51,8 @@ public class Odometry extends SubsystemBase{
         m_drive.getLeftEncoderDistance(),
         m_drive.getRighttEncoderDistance());
 
-        SmartDashboard.putNumber("Odometry X : ", m_pose.getX()); // 
-        SmartDashboard.putNumber("Odometry Y : ", m_pose.getY()); //
+        SmartDashboard.putNumber("X Displacement : ", m_pose.getX()); // 
+        SmartDashboard.putNumber("Y Displacement : ", m_pose.getY()); // 
         
     }
-
-
-    
 }

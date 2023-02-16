@@ -49,6 +49,7 @@ public class RobotContainer {
 
   public static XboxController driverXBox = new XboxController(1);
   public static XboxController operatorController = new XboxController(2);
+  public static PneumaticGrabber m_PneumaticGrabber = new PneumaticGrabber();
 
   private static final int A_BUTTON_XBOX = 1;
   private static final int B_BUTTON_XBOX = 2;
@@ -98,9 +99,9 @@ public class RobotContainer {
     JoystickButton brakeOff = new JoystickButton(driverXBox, B_BUTTON_XBOX);
     brakeOff.toggleOnTrue(new BrakeCommandOff(m_Pneumatics));
     JoystickButton grabberOn = new JoystickButton(operatorController, X_BUTTON_XBOX);
-            grabberGo.toggleOnTrue(new JoystickButton(m_Pneumatics));
+            grabberOn.toggleOnTrue(new RunCommand() -> m_PneumaticGrabber.grabberOn());
     JoystickButton grabberOff = new JoystickButton(operatorController, Y_BUTTON_XBOX);
-            grabberGo.toggleOnTrue(new JoystickButton(m_Pneumatics));
+            grabberOff.toggleOnTrue(new RunCommand() -> m_PneumaticGrabber.grabberOff());
 
   }
 

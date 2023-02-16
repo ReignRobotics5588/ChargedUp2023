@@ -15,10 +15,6 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to
@@ -33,14 +29,7 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
 
   AHRS m_ahrs = new AHRS(SPI.Port.kMXP);
-<<<<<<< Updated upstream
-
-  // :D
-
-  /**
-=======
-   /**
->>>>>>> Stashed changes
+/**
    * This function is run when the robot is first started up and should be used
    * for any
    * initialization code.

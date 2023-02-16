@@ -57,17 +57,6 @@ public class DriveSubsystem extends SubsystemBase {
   private RelativeEncoder m_backLeftEncoder = backLeftMotor.getEncoder();
 
   AHRS m_ahrs = new AHRS(SPI.Port.kMXP);
-<<<<<<< Updated upstream
-
-  DifferentialDriveOdometry m_odometry;
-
-  //may need to reset here
-
-  Pose2d m_pose;
-=======
-  DifferentialDriveOdometry m_odometry;
-  Pose2d m_pose = new Pose2d(); //may need to reset here (?)
->>>>>>> Stashed changes
 
   public DriveSubsystem() {
     frontLeftMotor.setInverted(true);
@@ -101,27 +90,6 @@ public class DriveSubsystem extends SubsystemBase {
 
     m_drive = new DifferentialDrive(frontLeftMotor, frontRightMotor);
 
-    Rotation2d rotation2D = new Rotation2d((double)m_ahrs.getYaw());
-    m_pose = new Pose2d();
-    m_odometry = new DifferentialDriveOdometry(rotation2D, getLeftEncoderDistance(), getRighttEncoderDistance(), m_pose);
-    // ((Object) m_drive).setRightSideInverted(false);
-    m_drive.setMaxOutput(.80);
-
-    Rotation2d rotation2D = new Rotation2d(m_ahrs.getYaw());
-    m_odometry = new DifferentialDriveOdometry(rotation2D, getLeftEncoderDistance(), getRighttEncoderDistance(), m_pose);
-    
-    //adjust odometry to wheel measurements
-    //9.85in(?) gear ratio, 6in diameter wheel 
-    //wheel speed-> chassis speed
-
-    // consolidate into one function probably
-    DifferentialDriveKinematics kinematics = new DifferentialDriveKinematics(0.1524);
-    DifferentialDriveWheelSpeeds wheelSpeeds = new DifferentialDriveWheelSpeeds(6.0,6.0);
-    ChassisSpeeds chassisSpeed = kinematics.toChassisSpeeds(wheelSpeeds); // https://docs.wpilib.org/en/stable/docs/software/kinematics-and-odometry/intro-and-chassis-speeds.html#creating-a-chassisspeeds-object-from-field-relative-speeds
-    
-    double linearVelocity = chassisSpeed.vxMetersPerSecond;
-    double angularVelocity = chassisSpeed.omegaRadiansPerSecond;
-
 
   }
 
@@ -138,21 +106,7 @@ public class DriveSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     m_drive.feedWatchdog(); // check this
-<<<<<<< Updated upstream
-    Rotation2d currentRotation = new Rotation2d(m_ahrs.getYaw());
-    m_pose = m_odometry.update(currentRotation,
-    getLeftEncoderDistance(),
-    getRighttEncoderDistance());
 
-    SmartDashboard.putNumber("Odometry X : ", m_pose.getX()); // 
-    SmartDashboard.putNumber("Odometry Y : ", m_pose.getY()); // 
-
-
-=======
-
-    SmartDashboard.putNumber("Odometry X: ", m_pose.getX()); // 
-    SmartDashboard.putNumber("Odometry Y: ", m_pose.getY()); // 
->>>>>>> Stashed changes
   }
 
   public void resetEncoders() {

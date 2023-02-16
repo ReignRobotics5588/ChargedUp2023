@@ -97,6 +97,10 @@ public class RobotContainer {
     brakeOn.toggleOnTrue(new BrakeCommandOn(m_Pneumatics));
     JoystickButton brakeOff = new JoystickButton(driverXBox, B_BUTTON_XBOX);
     brakeOff.toggleOnTrue(new BrakeCommandOff(m_Pneumatics));
+    JoystickButton grabberOn = new JoystickButton(operatorController, X_BUTTON_XBOX);
+            grabberGo.toggleOnTrue(new JoystickButton(m_Pneumatics));
+    JoystickButton grabberOff = new JoystickButton(operatorController, Y_BUTTON_XBOX);
+            grabberGo.toggleOnTrue(new JoystickButton(m_Pneumatics));
 
   }
 

@@ -10,8 +10,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 
 
 public class PneumaticGrabber extends SubsystemBase {
-    Compressor phCompressor = new Compressor(1, PneumaticsModuleType.REVPH);
-    DoubleSolenoid grabberSolenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, 0, 1 );
+    DoubleSolenoid grabberSolenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, 2, 7 );
     
 
   public PneumaticGrabber() {

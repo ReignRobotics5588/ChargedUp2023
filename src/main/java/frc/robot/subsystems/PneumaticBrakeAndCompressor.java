@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 
 public class PneumaticBrakeAndCompressor extends SubsystemBase {
     Compressor phCompressor = new Compressor(1, PneumaticsModuleType.REVPH);
-    DoubleSolenoid brakeSolenoidPH = new DoubleSolenoid(PneumaticsModuleType.REVPH, 5, 6 );
+    DoubleSolenoid brakeSolenoidPH = new DoubleSolenoid(PneumaticsModuleType.REVPH, 0, 15 );
     
 
   public PneumaticBrakeAndCompressor() {

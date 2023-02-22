@@ -10,6 +10,7 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.DriveCameraSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import com.revrobotics.CANSparkMax;
@@ -96,12 +97,15 @@ public class RobotContainer {
   private void configureButtonBindings() {
     JoystickButton brakeOn = new JoystickButton(driverXBox, A_BUTTON_XBOX);
     brakeOn.toggleOnTrue(new BrakeCommandOn(m_Pneumatics));
+
     JoystickButton brakeOff = new JoystickButton(driverXBox, B_BUTTON_XBOX);
     brakeOff.toggleOnTrue(new BrakeCommandOff(m_Pneumatics));
+
     JoystickButton grabberOn = new JoystickButton(operatorController, X_BUTTON_XBOX);
-            grabberOn.toggleOnTrue(new RunCommand() -> m_PneumaticGrabber.grabberOn());
+    grabberOn.toggleOnTrue(new InstantCommand(() -> m_PneumaticGrabber.grabberSetOn(),m_PneumaticGrabber));
+
     JoystickButton grabberOff = new JoystickButton(operatorController, Y_BUTTON_XBOX);
-            grabberOff.toggleOnTrue(new RunCommand() -> m_PneumaticGrabber.grabberOff());
+    grabberOff.toggleOnTrue(new InstantCommand(() -> m_PneumaticGrabber.grabberSetOff(),m_PneumaticGrabber));
 
   }
 

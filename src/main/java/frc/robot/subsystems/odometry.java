@@ -14,7 +14,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
 
-public class Odometry extends SubsystemBase{
+// 1 = level for pitch navx, +5 is up (front), -5 for pitch down 
+public class odometry extends SubsystemBase{
 
     DriveSubsystem m_drive = new DriveSubsystem();
 
@@ -26,7 +27,7 @@ public class Odometry extends SubsystemBase{
     double m_angularVelocity;
     double m_linearVelocity;
 
-    public Odometry(){
+    public odometry(){
 
         Rotation2d rotation2D = new Rotation2d(m_ahrs.getYaw());
         m_odometry = new DifferentialDriveOdometry(rotation2D, m_drive.getLeftEncoderDistance(), m_drive.getRighttEncoderDistance(), m_pose);

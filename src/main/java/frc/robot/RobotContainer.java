@@ -31,6 +31,8 @@ import frc.robot.commands.DriveDistance;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
+  // 1 = level for pitch navx, +5 is up (front), -5 for pitch down 
+
   // The robot's subsystems and commands are defined here...
   private final DriveSubsystem m_driveSubsystem = new DriveSubsystem();// declaring new drivesystem object
   // private final TurnInPlaceCommand m_autoCommand = new

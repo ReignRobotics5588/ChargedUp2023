@@ -52,11 +52,11 @@ public class ArmSubsystem extends SubsystemBase {
   }
 
   public void setUpperMotorSpeed(double speed){
-    upperJoint.set(speed * Constants.ARM_SPEED);
+    //upperJoint.set(speed * Constants.ARM_SPEED);
   }
 
   public void setLowerMotorSpeed(double speed){
-    lowerJoint.set(speed * Constants.ARM_SPEED);
+    //lowerJoint.set(speed * Constants.ARM_SPEED);
   }
 
   public void driveArm(double upperSpeed, double lowerSpeed){

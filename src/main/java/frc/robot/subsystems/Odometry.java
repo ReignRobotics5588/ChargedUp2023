@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
 
+// 1 = level for pitch navx, +5 is up (front), -5 for pitch down 
 public class Odometry extends SubsystemBase{
 
     DriveSubsystem m_drive = new DriveSubsystem();

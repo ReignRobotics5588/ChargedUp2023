@@ -15,7 +15,7 @@ public class PneumaticBrakeAndCompressor extends SubsystemBase {
     
 
   public PneumaticBrakeAndCompressor() {
-    brakeSolenoidPH.set(Value.kForward);
+    brakeSolenoidPH.set(Value.kReverse);
    }
 
   @Override

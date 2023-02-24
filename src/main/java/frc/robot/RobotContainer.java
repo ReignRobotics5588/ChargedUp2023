@@ -18,7 +18,6 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.RunCommand;
-import frc.robot.Constants;
 import frc.robot.commands.TurnInPlaceCommand;
 import frc.robot.commands.DriveDistance;
 import frc.robot.subsystems.PneumaticBrakeAndCompressor;
@@ -26,6 +25,7 @@ import frc.robot.subsystems.PneumaticGrabber;
 import frc.robot.commands.BrakeCommandOff;
 import frc.robot.commands.BrakeCommandOn;
 import frc.robot.subsystems.ArmSubsystem;
+import frc.robot.commands.AutoBalanceForward;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -38,11 +38,9 @@ import frc.robot.subsystems.ArmSubsystem;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final DriveSubsystem m_driveSubsystem = new DriveSubsystem();// declaring new drivesystem object
+  public final DriveSubsystem m_driveSubsystem = new DriveSubsystem();// declaring new drivesystem object
   private final DriveCameraSubsystem m_driveCameraSubsystem = new DriveCameraSubsystem();
-  // private final TurnInPlaceCommand m_autoCommand = new
-  // TurnInPlaceCommand(m_driveSubsystem, 90, 0.5);
-   private final DriveDistance m_autoCommand = new DriveDistance(m_driveSubsystem, 60, 0.7);
+  private final AutoBalanceForward m_autoCommand = new AutoBalanceForward(m_driveSubsystem);
   public static LimelightSubsystem m_LimelightSubsystem = new LimelightSubsystem();
   public static PneumaticBrakeAndCompressor m_Pneumatics = new PneumaticBrakeAndCompressor();
   public static ArmSubsystem m_ArmSubsystem = new ArmSubsystem();

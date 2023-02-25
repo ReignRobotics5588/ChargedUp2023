@@ -6,20 +6,21 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
+//import frc.robot.commands.ExampleCommand;
+//import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.DriveCameraSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.Joystick;
+//import com.revrobotics.CANSparkMax;
+//import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+//import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+//import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.RunCommand;
-import frc.robot.Constants;
-import frc.robot.commands.TurnInPlaceCommand;
+//import frc.robot.Constants;
+//import frc.robot.commands.TurnInPlaceCommand;
 import frc.robot.commands.DriveDistance;
 import frc.robot.subsystems.PneumaticBrakeAndCompressor;
 import frc.robot.subsystems.PneumaticGrabber;
@@ -49,6 +50,7 @@ public class RobotContainer {
 
   public static XboxController driverXBox = new XboxController(1);
   public static XboxController operatorController = new XboxController(2);
+  public static PneumaticGrabber m_PneumaticGrabber = new PneumaticGrabber();
 
   private static final int A_BUTTON_XBOX = 1;
   private static final int B_BUTTON_XBOX = 2;
@@ -95,8 +97,15 @@ public class RobotContainer {
   private void configureButtonBindings() {
     JoystickButton brakeOn = new JoystickButton(driverXBox, A_BUTTON_XBOX);
     brakeOn.toggleOnTrue(new BrakeCommandOn(m_Pneumatics));
+
     JoystickButton brakeOff = new JoystickButton(driverXBox, B_BUTTON_XBOX);
     brakeOff.toggleOnTrue(new BrakeCommandOff(m_Pneumatics));
+
+    JoystickButton grabberOn = new JoystickButton(operatorController, X_BUTTON_XBOX);
+    grabberOn.toggleOnTrue(new InstantCommand(() -> m_PneumaticGrabber.grabberSetOn(),m_PneumaticGrabber));
+
+    JoystickButton grabberOff = new JoystickButton(operatorController, Y_BUTTON_XBOX);
+    grabberOff.toggleOnTrue(new InstantCommand(() -> m_PneumaticGrabber.grabberSetOff(),m_PneumaticGrabber));
 
   }
 

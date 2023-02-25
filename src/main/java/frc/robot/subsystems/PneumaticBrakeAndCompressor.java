@@ -1,17 +1,17 @@
 package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.Timer;
+//import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
-import edu.wpi.first.wpilibj.Solenoid;
+//import edu.wpi.first.wpilibj.Solenoid;
 
 
 
 public class PneumaticBrakeAndCompressor extends SubsystemBase {
     Compressor phCompressor = new Compressor(1, PneumaticsModuleType.REVPH);
-    DoubleSolenoid brakeSolenoidPH = new DoubleSolenoid(PneumaticsModuleType.REVPH, 5, 6 );
+    DoubleSolenoid brakeSolenoidPH = new DoubleSolenoid(PneumaticsModuleType.REVPH, 0, 15 );
     
 
   public PneumaticBrakeAndCompressor() {

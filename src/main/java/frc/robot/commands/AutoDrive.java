@@ -3,13 +3,19 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.commands.DriveDistance;
+import frc.robot.subsystems.PneumaticBrakeAndCompressor;
+import frc.robot.commands.BrakeCommandOn;
+import frc.robot.commands.BrakeCommandOff;
+import frc.robot.Constants;
 
 public class AutoDrive extends SequentialCommandGroup{
-    private static final double FOWARD_DISTANCE = 60;
-    private static final double FOWARD_SPEED = 0.7;
-    public AutoDrive(DriveSubsystem drive) {
+    public AutoDrive(DriveSubsystem drive, PneumaticBrakeAndCompressor brake) {
         addCommands(
-            new DriveDistance(drive, 70, 0.7));
+            new DriveDistance(drive, Constants.FORWARD_DISTANCE, Constants.FORWARD_SPEED),
+            new AutoBalanceForward(drive),
+            new BrakeCommandOn(brake)
+            );
     }
 
 

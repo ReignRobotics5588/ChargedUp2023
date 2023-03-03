@@ -24,6 +24,7 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.commands.DriveDistance;
 import frc.robot.subsystems.PneumaticBrakeAndCompressor;
 import frc.robot.subsystems.PneumaticGrabber;
+import frc.robot.commands.AutoBalanceForward;
 import frc.robot.commands.BrakeCommandOff;
 import frc.robot.commands.BrakeCommandOn;
 import frc.robot.subsystems.ArmSubsystem;
@@ -43,7 +44,7 @@ public class RobotContainer {
   private final DriveCameraSubsystem m_driveCameraSubsystem = new DriveCameraSubsystem();
   // private final TurnInPlaceCommand m_autoCommand = new
   // TurnInPlaceCommand(m_driveSubsystem, 90, 0.5);
-   private final DriveDistance m_autoCommand = new DriveDistance(m_driveSubsystem, 60, 0.7);
+   private final AutoBalanceForward m_autoCommand = new AutoBalanceForward(m_driveSubsystem);
   public static LimelightSubsystem m_LimelightSubsystem = new LimelightSubsystem();
   public static PneumaticBrakeAndCompressor m_Pneumatics = new PneumaticBrakeAndCompressor();
   public static ArmSubsystem m_ArmSubsystem = new ArmSubsystem();
@@ -117,6 +118,7 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     m_driveSubsystem.resetEncoders();
+ 
     return m_autoCommand;
   }
 }

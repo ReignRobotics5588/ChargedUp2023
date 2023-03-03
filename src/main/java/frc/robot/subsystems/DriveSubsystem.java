@@ -18,6 +18,9 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
+import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.SPI;
+
 public class DriveSubsystem extends SubsystemBase {
 
   public static DifferentialDrive m_drive;
@@ -31,6 +34,9 @@ public class DriveSubsystem extends SubsystemBase {
   private RelativeEncoder m_frontRightEncoder = frontRightMotor.getEncoder();
   private RelativeEncoder m_backRightEncoder = backRightMotor.getEncoder();
   private RelativeEncoder m_backLeftEncoder = backLeftMotor.getEncoder();
+
+  
+  public AHRS m_ahrs = new AHRS(SPI.Port.kMXP);
 
   public DriveSubsystem() {
     frontLeftMotor.setInverted(true);
@@ -111,4 +117,11 @@ public class DriveSubsystem extends SubsystemBase {
     m_drive.setMaxOutput(maxOutput);
   }
 
+  public double getGyroAngle(){
+    return m_ahrs.getAngle();
+  }
+
+  public double getGyroPitch(){
+    return m_ahrs.getPitch();
+  }
 }

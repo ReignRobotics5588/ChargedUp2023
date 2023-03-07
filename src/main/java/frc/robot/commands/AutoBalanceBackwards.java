@@ -4,13 +4,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.Constants;
+
+import java.io.Console;
+
 import edu.wpi.first.wpilibj.RobotState;
 
-public class AutoBalanceForward extends CommandBase {
+public class AutoBalanceBackwards extends CommandBase {
   @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
   private final DriveSubsystem m_driveSubsystem;
 
-  public AutoBalanceForward(DriveSubsystem DriveSubsystem) {
+  public AutoBalanceBackwards(DriveSubsystem DriveSubsystem) {
     m_driveSubsystem = DriveSubsystem;
   }
     
@@ -31,9 +34,10 @@ public class AutoBalanceForward extends CommandBase {
     
     //while(m_driveSubsystem.getGyroPitch() >= 3 || m_driveSubsystem.getGyroPitch() <= -3){
       if(m_driveSubsystem.getGyroPitch() >= 3.5){
-        SmartDashboard.putNumber("state", 2);
+        
+        SmartDashboard.putNumber("pitch", (m_driveSubsystem.getGyroPitch()));
 
-        m_driveSubsystem.tankDrive(-0.35,-0.35);
+        m_driveSubsystem.tankDrive(-0.45,-0.45);
       }else{
       end(true);
       }
@@ -57,7 +61,10 @@ public class AutoBalanceForward extends CommandBase {
   // Returns true when the command should end.
   @Override 
   public boolean isFinished() {
-    return RobotState.isTeleop();
+    SmartDashboard.putString(
+      "hello world", "hello team");
+    return !RobotState.isAutonomous();
+    //return false;
 
 
 

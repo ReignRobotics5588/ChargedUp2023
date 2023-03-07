@@ -25,9 +25,11 @@ import frc.robot.commands.DriveDistance;
 import frc.robot.subsystems.PneumaticBrakeAndCompressor;
 import frc.robot.subsystems.PneumaticGrabber;
 import frc.robot.commands.AutoBalanceForward;
+import frc.robot.commands.AutoDrive;
 import frc.robot.commands.BrakeCommandOff;
 import frc.robot.commands.BrakeCommandOn;
 import frc.robot.subsystems.ArmSubsystem;
+import frc.robot.commands.AutoBalanceBackwards;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -44,7 +46,8 @@ public class RobotContainer {
   private final DriveCameraSubsystem m_driveCameraSubsystem = new DriveCameraSubsystem();
   // private final TurnInPlaceCommand m_autoCommand = new
   // TurnInPlaceCommand(m_driveSubsystem, 90, 0.5);
-   private final AutoBalanceForward m_autoCommand = new AutoBalanceForward(m_driveSubsystem);
+  private final AutoDrive m_autoCommand = new AutoDrive(m_driveSubsystem,m_Pneumatics);
+  //private final AutoBalanceBackwards m_autoCommand = new AutoBalanceBackwards(m_driveSubsystem);
   public static LimelightSubsystem m_LimelightSubsystem = new LimelightSubsystem();
   public static PneumaticBrakeAndCompressor m_Pneumatics = new PneumaticBrakeAndCompressor();
   public static ArmSubsystem m_ArmSubsystem = new ArmSubsystem();

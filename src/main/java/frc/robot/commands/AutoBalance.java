@@ -9,11 +9,11 @@ import java.io.Console;
 
 import edu.wpi.first.wpilibj.RobotState;
 
-public class AutoBalanceBackwards extends CommandBase {
+public class AutoBalance extends CommandBase {
   @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
   private final DriveSubsystem m_driveSubsystem;
 
-  public AutoBalanceBackwards(DriveSubsystem DriveSubsystem) {
+  public AutoBalance(DriveSubsystem DriveSubsystem) {
     m_driveSubsystem = DriveSubsystem;
   }
     
@@ -36,9 +36,20 @@ public class AutoBalanceBackwards extends CommandBase {
       if(m_driveSubsystem.getGyroPitch() >= 3.5){
         
         SmartDashboard.putNumber("pitch", (m_driveSubsystem.getGyroPitch()));
+        SmartDashboard.putNumber("state", 2);
 
-        m_driveSubsystem.tankDrive(-0.45,-0.45);
-      }else{
+        m_driveSubsystem.tankDrive(-0.35,-0.35);
+      }
+
+      else if(m_driveSubsystem.getGyroPitch() <= 3.5){
+        
+        SmartDashboard.putNumber("pitch", (m_driveSubsystem.getGyroPitch()));
+        SmartDashboard.putNumber("state", 2);
+
+        m_driveSubsystem.tankDrive(0.45,0.45);
+      }
+      
+      else{
       end(true);
       }
 

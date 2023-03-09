@@ -7,7 +7,7 @@ import frc.robot.commands.DriveDistance;
 import frc.robot.subsystems.PneumaticBrakeAndCompressor;
 import frc.robot.commands.BrakeCommandOn;
 import frc.robot.commands.BrakeCommandOff;
-import frc.robot.commands.AutoBalanceBackwards;
+import frc.robot.commands.AutoBalance;
 import frc.robot.Constants;
 
 public class AutoDrive extends SequentialCommandGroup{
@@ -15,7 +15,7 @@ public class AutoDrive extends SequentialCommandGroup{
         addCommands(
             new DriveDistance(drive, Constants.FORWARD_DISTANCE, Constants.FORWARD_SPEED),
             new DriveDistance(drive,62, -Constants.FORWARD_SPEED),
-            new AutoBalanceBackwards(drive),
+            new AutoBalance(drive),
             new BrakeCommandOff(brake)//BrakeCommandOff turns the brake on
             );
     }

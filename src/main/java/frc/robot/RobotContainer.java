@@ -84,8 +84,7 @@ public class RobotContainer {
             m_driveSubsystem));
 
     m_ArmSubsystem.setDefaultCommand(
-      new RunCommand(() -> m_ArmSubsystem.driveArm(operatorController.getRawAxis(1), operatorController.getRawAxis(5)),
-          m_ArmSubsystem));
+      new RunCommand(() -> m_ArmSubsystem.setArmSpeed(operatorController.getRawAxis(1), operatorController.getRawAxis(5)), m_ArmSubsystem));
     // ^ Setting the Default Command to m_robotDrive, meaning it will drive as long
     // as nothing else is scheduled
 

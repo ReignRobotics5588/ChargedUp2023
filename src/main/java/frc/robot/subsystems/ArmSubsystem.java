@@ -78,6 +78,27 @@ public class ArmSubsystem extends SubsystemBase {
     setLowerMotorSpeed(lowerSpeed);
   }
 
+  public boolean getLowerBackwardsSwitch(){
+   return m_LowerBackwardsLimitSwitch.isPressed();
+  }
+
+  public boolean getLowerForwardsSwitch(){
+    return m_LowerForwardLimitSwitch.isPressed();
+   }
+
+   public void setArmSpeed(double lowerSpeed, double upperSpeed){
+    if(getLowerBackwardsSwitch() && lowerSpeed > 0){
+      setLowerMotorSpeed(0);
+    }
+    else setLowerMotorSpeed(Constants.ARM_SPEED);
+
+    if(getLowerForwardsSwitch() && upperSpeed > 0){
+      setUpperMotorSpeed(0);
+    }
+    else  setUpperMotorSpeed(Constants.ARM_SPEED);
+
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

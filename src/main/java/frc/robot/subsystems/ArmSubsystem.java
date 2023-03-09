@@ -82,20 +82,38 @@ public class ArmSubsystem extends SubsystemBase {
    return m_LowerBackwardsLimitSwitch.isPressed();
   }
 
-  public boolean getLowerForwardsSwitch(){
+  public boolean getUpperForwardsSwitch(){
     return m_LowerForwardLimitSwitch.isPressed();
    }
 
+   public boolean getUpperBackwardsSwitch(){
+    return m_LowerBackwardsLimitSwitch.isPressed();
+   }
+ 
+   public boolean getLowerForwardsSwitch(){
+     return m_LowerForwardLimitSwitch.isPressed();
+    }
+
    public void setArmSpeed(double lowerSpeed, double upperSpeed){
-    if(getLowerBackwardsSwitch() && lowerSpeed > 0){
+    if(getLowerBackwardsSwitch() && lowerSpeed < 0){
       setLowerMotorSpeed(0);
     }
-    else setLowerMotorSpeed(Constants.ARM_SPEED);
+    else setLowerMotorSpeed(lowerSpeed * Constants.ARM_SPEED);
 
     if(getLowerForwardsSwitch() && upperSpeed > 0){
       setUpperMotorSpeed(0);
     }
-    else  setUpperMotorSpeed(Constants.ARM_SPEED);
+    else  setUpperMotorSpeed(upperSpeed * Constants.ARM_SPEED);
+
+    if(getUpperBackwardsSwitch() && lowerSpeed < 0){
+      setLowerMotorSpeed(0);
+    }
+    else setUpperMotorSpeed(lowerSpeed * Constants.ARM_SPEED);
+
+    if(getUpperForwardsSwitch() && upperSpeed > 0){
+      setUpperMotorSpeed(0);
+    }
+    else  setUpperMotorSpeed(upperSpeed * Constants.ARM_SPEED);
 
   }
 

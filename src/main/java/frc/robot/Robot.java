@@ -61,8 +61,8 @@ public class Robot extends TimedRobot {
     // robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
-    SmartDashboard.putNumber("Upper Count Arm", RobotContainer.m_ArmSubsystem.getUpperPosition());
-    SmartDashboard.putNumber("Lower Count Arm", RobotContainer.m_ArmSubsystem.getLowerPosition());
+    //SmartDashboard.putNumber("Upper Count Arm", RobotContainer.m_ArmSubsystem.getUpperPosition());
+    //SmartDashboard.putNumber("Lower Count Arm", RobotContainer.m_ArmSubsystem.getLowerPosition());
 
   }
 

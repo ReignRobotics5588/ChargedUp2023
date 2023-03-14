@@ -148,6 +148,13 @@ public class ArmSubsystem extends SubsystemBase {
     */
   }
 
+  public double getUpperEncoderPosition(){
+    return upperJointEncoder.getPosition() + Constants.upperEncoderAdjust;
+  }
+
+  public double getLowerEncoderPosition(){
+    return lowerJointEncoder.getPosition() + Constants.lowerEncoderAdjust;
+  }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
@@ -156,8 +163,8 @@ public class ArmSubsystem extends SubsystemBase {
     SmartDashboard.putBoolean("Lower Joint Limit Switch Forward", m_LowerForwardLimitSwitch.isPressed());
     SmartDashboard.putBoolean("Lower Joint Limit Switch Backwards", m_LowerBackwardsLimitSwitch.isPressed());
 
-    SmartDashboard.putNumber("Upper Encoder", upperJointEncoder.getPosition());
-    SmartDashboard.putNumber("Lower Encoder", lowerJointEncoder.getPosition());
+    SmartDashboard.putNumber("Upper Encoder", getUpperEncoderPosition());
+    SmartDashboard.putNumber("Lower Encoder", getLowerEncoderPosition());
 
   }
 

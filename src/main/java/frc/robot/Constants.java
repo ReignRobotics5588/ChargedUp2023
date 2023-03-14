@@ -15,4 +15,6 @@ public final class Constants {
     public static final double ARM_SPEED = 0.55;
     public static final double FORWARD_DISTANCE = 130;
     public static final double FORWARD_SPEED = 0.7;
+    public static final double upperEncoderAdjust = 0.0;
+    public static final double lowerEncoderAdjust = 0.2;
 }

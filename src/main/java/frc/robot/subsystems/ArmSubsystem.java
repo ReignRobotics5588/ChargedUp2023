@@ -5,12 +5,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import com.revrobotics.SparkMaxAlternateEncoder.Type;
+//import com.revrobotics.SparkMaxAlternateEncoder.Type;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkMaxAbsoluteEncoder;
 import com.revrobotics.SparkMaxLimitSwitch;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.IdleMode;
 import frc.robot.Constants;
+import edu.wpi.first.math.filter.SlewRateLimiter;
+import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
 
 public class ArmSubsystem extends SubsystemBase {
 
@@ -28,15 +31,26 @@ public class ArmSubsystem extends SubsystemBase {
     private SparkMaxLimitSwitch m_LowerForwardLimitSwitch;
     private SparkMaxLimitSwitch m_LowerBackwardsLimitSwitch;
 
+    private SparkMaxAbsoluteEncoder upperJointEncoder;
+    private SparkMaxAbsoluteEncoder lowerJointEncoder;
+
 
     private int kCPR = 8192;
+
+    private SlewRateLimiter upperSlew = new SlewRateLimiter(3.0);
+    private SlewRateLimiter lowerSlew = new SlewRateLimiter(3.0);
+
 
   /** Creates a new ExampleSubsystem. */
   public ArmSubsystem() {
     upperJoint = new CANSparkMax(11, MotorType.kBrushless);
     lowerJoint = new CANSparkMax(12, MotorType.kBrushless);
     lowerJoint.setInverted(true);
+    upperJoint.setInverted(false);
+    upperJointEncoder = upperJoint.getAbsoluteEncoder(Type.kDutyCycle);
+    lowerJointEncoder = lowerJoint.getAbsoluteEncoder(Type.kDutyCycle);
 
+    upperJointEncoder.setInverted(true);
     //m_upperJointEncoder = upperJoint.getAlternateEncoder(Type.kQuadrature, kCPR);
     //m_lowerJointEncoder = lowerJoint.getAlternateEncoder(Type.kQuadrature, kCPR);
 
@@ -50,10 +64,13 @@ public class ArmSubsystem extends SubsystemBase {
     lowerJoint.setIdleMode(IdleMode.kBrake);
 
     m_UpperForwardLimitSwitch = upperJoint.getForwardLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
+  //  m_UpperForwardLimitSwitch.enableLimitSwitch(false);
     m_UpperBackwardsLimitSwitch = upperJoint.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
+  //  m_UpperBackwardsLimitSwitch.enableLimitSwitch(false);
     m_LowerForwardLimitSwitch = lowerJoint.getForwardLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
+//    m_LowerForwardLimitSwitch.enableLimitSwitch(false);
     m_LowerBackwardsLimitSwitch = lowerJoint.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
-
+ //   m_LowerBackwardsLimitSwitch.enableLimitSwitch(false);
   }
   
   public double getUpperPosition(){
@@ -66,12 +83,16 @@ public class ArmSubsystem extends SubsystemBase {
 
   public void setUpperMotorSpeed(double speed){
     upperJoint.set(speed * Constants.ARM_SPEED);
-    
   }
 
   public void setLowerMotorSpeed(double speed){
     lowerJoint.set(speed * Constants.ARM_SPEED);
   }
+
+  /*public void driveArm(double upperSpeed, double lowerSpeed){
+    setUpperMotorSpeed(upperMotor.calculate(upperSpeed));
+    setLowerMotorSpeed(lowerMotor.calculate(lowerSpeed));
+  }*/
 
   public void driveArm(double upperSpeed, double lowerSpeed){
     setUpperMotorSpeed(upperSpeed);
@@ -83,11 +104,11 @@ public class ArmSubsystem extends SubsystemBase {
   }
 
   public boolean getUpperForwardsSwitch(){
-    return m_LowerForwardLimitSwitch.isPressed();
+    return m_UpperForwardLimitSwitch.isPressed();
    }
 
    public boolean getUpperBackwardsSwitch(){
-    return m_LowerBackwardsLimitSwitch.isPressed();
+    return m_UpperBackwardsLimitSwitch.isPressed();
    }
  
    public boolean getLowerForwardsSwitch(){
@@ -95,26 +116,36 @@ public class ArmSubsystem extends SubsystemBase {
     }
 
    public void setArmSpeed(double lowerSpeed, double upperSpeed){
-    if(getLowerBackwardsSwitch() && lowerSpeed < 0){
-      setLowerMotorSpeed(0);
+   //upperSpeed=-upperSpeed;//test
+
+    SmartDashboard.putNumber("Upper Speed", upperSpeed);
+    setLowerMotorSpeed(lowerSlew.calculate(lowerSpeed));
+    setUpperMotorSpeed(upperSlew.calculate(upperSpeed));
+/* 
+    if(getLowerBackwardsSwitch() && (lowerSpeed < 0.0)){
+      setLowerMotorSpeed(0.0);
     }
     else setLowerMotorSpeed(lowerSpeed * Constants.ARM_SPEED);
 
-    if(getLowerForwardsSwitch() && upperSpeed > 0){
-      setUpperMotorSpeed(0);
+    if(getLowerForwardsSwitch() && (lowerSpeed > 0.0)){
+      setLowerMotorSpeed(0.0);
     }
-    else  setUpperMotorSpeed(upperSpeed * Constants.ARM_SPEED);
+    else  setLowerMotorSpeed(lowerSpeed * Constants.ARM_SPEED);
 
-    if(getUpperBackwardsSwitch() && lowerSpeed < 0){
-      setLowerMotorSpeed(0);
+    if(getUpperForwardsSwitch() && (upperSpeed > 0.0)){
+      setUpperMotorSpeed(0.0);
+      SmartDashboard.putBoolean("Upper Forward Stop", true);
     }
-    else setUpperMotorSpeed(lowerSpeed * Constants.ARM_SPEED);
-
-    if(getUpperForwardsSwitch() && upperSpeed > 0){
-      setUpperMotorSpeed(0);
+    else if(getUpperBackwardsSwitch() && (upperSpeed < 0.0)){
+      setUpperMotorSpeed(0.0);
+      SmartDashboard.putBoolean("Upper Forward Stop", true);
     }
-    else  setUpperMotorSpeed(upperSpeed * Constants.ARM_SPEED);
-
+    else
+    {
+        setUpperMotorSpeed(upperSpeed * Constants.ARM_SPEED);
+        SmartDashboard.putBoolean("Upper Forward Stop", false);
+    }
+    */
   }
 
   @Override
@@ -124,6 +155,9 @@ public class ArmSubsystem extends SubsystemBase {
     SmartDashboard.putBoolean("Upper Joint Limit Switch Backwards", m_UpperBackwardsLimitSwitch.isPressed());
     SmartDashboard.putBoolean("Lower Joint Limit Switch Forward", m_LowerForwardLimitSwitch.isPressed());
     SmartDashboard.putBoolean("Lower Joint Limit Switch Backwards", m_LowerBackwardsLimitSwitch.isPressed());
+
+    SmartDashboard.putNumber("Upper Encoder", upperJointEncoder.getPosition());
+    SmartDashboard.putNumber("Lower Encoder", lowerJointEncoder.getPosition());
 
   }
 

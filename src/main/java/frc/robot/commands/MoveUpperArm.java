@@ -18,6 +18,8 @@ public class MoveUpperArm extends CommandBase {
   public MoveUpperArm(ArmSubsystem a, double target) {
     m_arm = a;
     m_target = target;
+
+    addRequirements(m_arm);
   }
     
 
@@ -27,43 +29,36 @@ public class MoveUpperArm extends CommandBase {
   }
 
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-   /*  while(m_driveSubsystem.getGyroPitch() >= -2 || m_driveSubsystem.getGyroPitch() <= 2){
-      SmartDashboard.putNumber("state", 1);
-      m_driveSubsystem.tankDrive(0.4, 0.4);
-    }*/
+    if(m_arm.getUpperEncoderPosition() > m_target){
+
+      m_arm.setArmSpeed(0.0,-(Constants.ARM_SPEED));
+
+    }
+
+    else if(m_arm.getUpperEncoderPosition() < m_target){
+
+      m_arm.setArmSpeed(0.0,(Constants.ARM_SPEED));
+
+    }
     
-    //while(m_driveSubsystem.getGyroPitch() >= 3 || m_driveSubsystem.getGyroPitch() <= -3){
-      if(m_arm.getLowerEncoderPosition() > m_target){
-
-        m_arm.setArmSpeed(-(Constants.ARM_SPEED), 0.0);
-
-      }
-
-      else if(m_arm.getLowerEncoderPosition() < m_target){
-
-        m_arm.setArmSpeed((Constants.ARM_SPEED), 0.0);
-
-      }
-      
-      else{
-      end(true);
-      }
+    else{
+    end(true);
+    }
 
   }
 
-  // Called once the command ends or is interrupted.
+  
   @Override
   public void end(boolean interrupted) {
     //m_driveSubsystem.tankDrive(0, 0);
     m_arm.setArmSpeed(0,0);
   }
 
-  // Returns true when the command should end.
   @Override 
   public boolean isFinished() {
-    return Math.abs(m_target - m_arm.getLowerPosition()) <= Constants.ARM_POSITION_ERROR;
+    SmartDashboard.putNumber("UPPERARMERROR", m_target-m_arm.getUpperPosition());
+    return Math.abs(m_target - m_arm.getUpperPosition()) <= Constants.ARM_POSITION_ERROR;
   }
 }

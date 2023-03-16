@@ -119,8 +119,17 @@ public class ArmSubsystem extends SubsystemBase {
    //upperSpeed=-upperSpeed;//test
 
     SmartDashboard.putNumber("Upper Speed", upperSpeed);
-    setLowerMotorSpeed(lowerSlew.calculate(lowerSpeed));
-    setUpperMotorSpeed(upperSlew.calculate(upperSpeed));
+    double lowerSlewedSpeed = lowerSlew.calculate(lowerSpeed);
+    double upperSlewedSpeed = upperSlew.calculate(upperSpeed);
+
+    if(Math.abs(lowerSlewedSpeed) < 0.05)
+      lowerSlewedSpeed = 0;
+
+    if (Math.abs(upperSlewedSpeed) < 0.05)
+      upperSlewedSpeed = 0;
+    
+    setLowerMotorSpeed(lowerSlewedSpeed);
+    setUpperMotorSpeed(upperSlewedSpeed);
 /* 
     if(getLowerBackwardsSwitch() && (lowerSpeed < 0.0)){
       setLowerMotorSpeed(0.0);

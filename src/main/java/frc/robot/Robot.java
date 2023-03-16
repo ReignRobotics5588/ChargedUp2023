@@ -24,8 +24,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
-
   private RobotContainer m_robotContainer;
+
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -103,6 +103,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    RobotContainer.m_Pneumatics.brakeSetOff();
   }
 
   /** This function is called periodically during operator control. */
@@ -114,6 +115,7 @@ public class Robot extends TimedRobot {
   public void testInit() {
     // Cancels all running commands at the start of test mode.
     CommandScheduler.getInstance().cancelAll();
+    //turn brakes off
   }
 
   /** This function is called periodically during test mode. */

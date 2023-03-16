@@ -20,8 +20,8 @@ public class ArmSubsystem extends SubsystemBase {
     private CANSparkMax upperJoint;
     private CANSparkMax lowerJoint;
 
-    private RelativeEncoder m_upperJointEncoder;
-    private RelativeEncoder m_lowerJointEncoder;
+    //private RelativeEncoder m_upperJointEncoder;
+    //private RelativeEncoder m_lowerJointEncoder;
 
     private SparkMaxPIDController m_upperPID;
     private SparkMaxPIDController m_lowerPID;
@@ -31,8 +31,8 @@ public class ArmSubsystem extends SubsystemBase {
     private SparkMaxLimitSwitch m_LowerForwardLimitSwitch;
     private SparkMaxLimitSwitch m_LowerBackwardsLimitSwitch;
 
-    private SparkMaxAbsoluteEncoder upperJointEncoder;
-    private SparkMaxAbsoluteEncoder lowerJointEncoder;
+    private SparkMaxAbsoluteEncoder m_upperJointEncoder;
+    private SparkMaxAbsoluteEncoder m_lowerJointEncoder;
 
 
     private int kCPR = 8192;
@@ -47,10 +47,10 @@ public class ArmSubsystem extends SubsystemBase {
     lowerJoint = new CANSparkMax(12, MotorType.kBrushless);
     lowerJoint.setInverted(true);
     upperJoint.setInverted(false);
-    upperJointEncoder = upperJoint.getAbsoluteEncoder(Type.kDutyCycle);
-    lowerJointEncoder = lowerJoint.getAbsoluteEncoder(Type.kDutyCycle);
+    m_upperJointEncoder = upperJoint.getAbsoluteEncoder(Type.kDutyCycle);
+    m_lowerJointEncoder = lowerJoint.getAbsoluteEncoder(Type.kDutyCycle);
 
-    upperJointEncoder.setInverted(true);
+    m_upperJointEncoder.setInverted(true);
     //m_upperJointEncoder = upperJoint.getAlternateEncoder(Type.kQuadrature, kCPR);
     //m_lowerJointEncoder = lowerJoint.getAlternateEncoder(Type.kQuadrature, kCPR);
 
@@ -158,11 +158,11 @@ public class ArmSubsystem extends SubsystemBase {
   }
 
   public double getUpperEncoderPosition(){
-    return upperJointEncoder.getPosition() + Constants.upperEncoderAdjust;
+    return m_upperJointEncoder.getPosition() + Constants.upperEncoderAdjust;
   }
 
   public double getLowerEncoderPosition(){
-    return lowerJointEncoder.getPosition() + Constants.lowerEncoderAdjust;
+    return m_lowerJointEncoder.getPosition() + Constants.lowerEncoderAdjust;
   }
   @Override
   public void periodic() {

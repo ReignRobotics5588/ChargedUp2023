@@ -115,6 +115,7 @@ public class ArmSubsystem extends SubsystemBase {
      return m_LowerForwardLimitSwitch.isPressed();
     }
 
+
    public void setArmSpeed(double lowerSpeed, double upperSpeed){
    //upperSpeed=-upperSpeed;//test
 

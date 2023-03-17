@@ -1,0 +1,13 @@
+Starting position:
+
+Lower:0.301
+Upper:0.887
+
+
+Middle Cube:
+Lower: 0.745
+Upper: 0.884
+
+Upper Cube:
+Lower: 0.188
+Upper: 1.064

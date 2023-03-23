@@ -34,7 +34,7 @@ public class RobotContainer {
 
 
   //private final AutoDrive m_autoCommand = new AutoDrive(m_driveSubsystem,m_Pneumatics);
-  private final DriveDistance m_autoCommand = new DriveDistance(m_driveSubsystem, 40, 0.85);
+  private final AutoDrive m_autoCommand = new AutoDrive(m_driveSubsystem, m_Pneumatics, m_PneumaticGrabber, m_ArmSubsystem);
 
 
   //private final AutoBalanceBackwards m_autoCommand = new AutoBalanceBackwards(m_driveSubsystem);
@@ -114,12 +114,14 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     m_driveSubsystem.resetEncoders();
-   // return m_autoCommand;
-     return Commands.sequence(
+   return m_autoCommand;
+     
+   
+   /*return Commands.sequence(
       new InstantCommand(() -> m_PneumaticGrabber.grabberSetOff(),m_PneumaticGrabber),
       new WaitCommand(1.0),
       m_autoCommand
-      );
+      ); */
        //return new InstantCommand(() -> m_PneumaticGrabber.grabberSetOff(),m_PneumaticGrabber);
   }
 }

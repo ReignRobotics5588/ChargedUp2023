@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.Constants;
+import edu.wpi.first.wpilibj.Timer;
 
 import java.io.Console;
 
@@ -38,7 +39,7 @@ public class AutoBalance extends CommandBase {
         SmartDashboard.putNumber("pitch", (m_driveSubsystem.getGyroPitch()));
         SmartDashboard.putNumber("state", 2);
 
-        m_driveSubsystem.tankDrive(-0.35,-0.35);
+        m_driveSubsystem.tankDrive(-0.325,-0.325);
       }
 
       else if(m_driveSubsystem.getGyroPitch() <= 3.5){
@@ -46,7 +47,7 @@ public class AutoBalance extends CommandBase {
         SmartDashboard.putNumber("pitch", (m_driveSubsystem.getGyroPitch()));
         SmartDashboard.putNumber("state", 2);
 
-        m_driveSubsystem.tankDrive(0.45,0.45);
+        m_driveSubsystem.tankDrive(0.3,0.3);
       }
       
       else{
@@ -74,7 +75,8 @@ public class AutoBalance extends CommandBase {
   public boolean isFinished() {
     SmartDashboard.putString(
       "hello world", "hello team");
-    return !RobotState.isAutonomous();
+    return Math.abs( m_driveSubsystem.getGyroPitch()) <= 1 ;
+    //return !RobotState.isAutonomous();
     //return false;
 
 
